@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ajax - API</title>
+</head>
+<body>
+    <button id="button">Load GitHub Users</button>
+    <p>
+        <h1>GitHub Users</h1>
+        <div id="users"></div>
+    </p>
+
+    <script>
+        document.getElementById('button').addEventListener('click', loadUsers);
+
+        // Load GitHub Users
+        function loadUsers() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://localhost:8080/php_rest_api/api/post/read.php', true);
+
+            xhr.onload = function() {
+                if(this.status == 200) {
+                    var users = JSON.parse(this.responseText);
+
+                    console.log(users);
+                }
+            }
+
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
